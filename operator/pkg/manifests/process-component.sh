@@ -45,20 +45,20 @@ if [[ "${LOCAL_MODE}" != "true" ]]; then
     git clean -fd
 fi
 
-# Step 1: Update upstream references for this component (if it has any)
-echo "Step 1: Checking for upstream ref updates for ${COMPONENT}..."
-cd operator/pkg/manifests
-set +e
-# Only update refs that affect this component
-COMPONENT_FILTER="${COMPONENT}" bash update-upstream-refs.sh
-ref_update_exit=$?
-set -e
-cd "${WORKSPACE_ROOT}"
+# # Step 1: Update upstream references for this component (if it has any)
+# echo "Step 1: Checking for upstream ref updates for ${COMPONENT}..."
+# cd operator/pkg/manifests
+# set +e
+# # Only update refs that affect this component
+# COMPONENT_FILTER="${COMPONENT}" bash update-upstream-refs.sh
+# ref_update_exit=$?
+# set -e
+# cd "${WORKSPACE_ROOT}"
 
-# If component has no upstream refs, that's okay - continue to build step
-if [ ${ref_update_exit} -ne 0 ] && [ ${ref_update_exit} -ne 1 ]; then
-    echo "  ⚠ Ref update had issues, but continuing..."
-fi
+# # If component has no upstream refs, that's okay - continue to build step
+# if [ ${ref_update_exit} -ne 0 ] && [ ${ref_update_exit} -ne 1 ]; then
+#     echo "  ⚠ Ref update had issues, but continuing..."
+# fi
 
 # Step 2: Build this component
 echo "Step 2: Building ${COMPONENT}..."
